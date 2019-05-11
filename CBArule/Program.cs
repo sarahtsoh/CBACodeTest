@@ -25,6 +25,7 @@ namespace CBArule
             var services = new ServiceCollection()
                            .AddLogging()
                            .AddSingleton<IRulesApplicationService, RulesApplicationService>()
+                           .AddSingleton<IFileCleanUpService, FileCleanUpService>()
                            .AddSingleton<IRule, Rule1>()
                            .AddSingleton<IRule, Rule2>()
                            .AddSingleton<IRule, Rule3>()
@@ -34,6 +35,7 @@ namespace CBArule
             services.Configure<Rule2Config>(configuration.GetSection("RulesConfig:Rule2Config"));
             services.Configure<Rule3Config>(configuration.GetSection("RulesConfig:Rule3Config"));
             services.Configure<Rule4Config>(configuration.GetSection("RulesConfig:Rule4Config"));
+            services.Configure<FilePathConfig>(configuration.GetSection("FilePathConfig"));
             var serviceProvider = services.BuildServiceProvider();
 
             serviceProvider.GetService<ILoggerFactory>()
@@ -44,6 +46,10 @@ namespace CBArule
                 .CreateLogger<Program>();
             logger.LogDebug("Starting application");
 
+            var cleanUpService = serviceProvider.GetService<IFileCleanUpService>();
+            var ruleService = serviceProvider.GetService<IRulesApplicationService>();
+          
+
             //CreateWebHostBuilder(args).Build().Run();
             bool endApp = false;
             while (!endApp)
@@ -52,7 +58,7 @@ namespace CBArule
                 var str = Console.ReadLine();
                 try
                 {
-                    var ruleService = serviceProvider.GetService<IRulesApplicationService>();
+                    cleanUpService.FileCleanUp();
                     ruleService.ExecuteRules(str);
                 }
                 catch(Exception ex)

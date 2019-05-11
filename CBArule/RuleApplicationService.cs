@@ -12,12 +12,7 @@ namespace CBArule
 
         public RulesApplicationService(IEnumerable<IRule> ruleList)//IOption)
         {
-            //string aSearchStr = "aA";
-            //string bSearchStr = "bB";
-            //string eSearchStr = "eE";
-            //string abcSearchStr = "abc";
-            //string cSearchStr = "cC";
-            //base on IOption
+            
            _ruleList = ruleList;
 
         }

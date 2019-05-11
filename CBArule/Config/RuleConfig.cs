@@ -12,6 +12,7 @@ namespace CBArule
         public string SearchStr2 { get; set; }
         public bool IsRuleIncluded { get; set; }
         public bool IsStopOnThisRule { get; set; }
+        public string FileName { get; set; }
     }
 
     public class Rule2Config
@@ -21,6 +22,7 @@ namespace CBArule
         public string SearchStr2 { get; set; }
         public bool IsRuleIncluded { get; set; }
         public bool IsStopOnThisRule { get; set; }
+        public string FileName { get; set; }
     }
 
     public class Rule3Config
@@ -30,6 +32,7 @@ namespace CBArule
         public string SearchStr2 { get; set; }
         public bool IsRuleIncluded { get; set; }
         public bool IsStopOnThisRule { get; set; }
+        public string FileName { get; set; }
     }
 
     public class Rule4Config
@@ -39,6 +42,7 @@ namespace CBArule
         public string SearchStr2 { get; set; }
         public bool IsRuleIncluded { get; set; }
         public bool IsStopOnThisRule { get; set; }
+        public string FileName { get; set; }
     }
 
 
@@ -48,6 +52,12 @@ namespace CBArule
         public Rule2 rule2 { get; set; }
         public Rule3 rule3 { get; set; }
         public Rule4 rule4 { get; set; }
+    }
+
+
+    public class FilePathConfig
+    {
+        public string FilePath { get; set; }
     }
 }
 

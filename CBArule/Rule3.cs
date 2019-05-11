@@ -10,18 +10,20 @@ namespace CBArule
     {
         List<char> _abcSearchList = null;
         Rule3Config _rule3Config;
+        FilePathConfig _filePathConfig;
 
-        public Rule3(string abcSearchStr)
-        {
-            _abcSearchList = Helper.GetList(null, string.IsNullOrEmpty(abcSearchStr) ? "abc" : abcSearchStr);
+        //public Rule3(string abcSearchStr)
+        //{
+        //    _abcSearchList = Helper.GetList(null, string.IsNullOrEmpty(abcSearchStr) ? "abc" : abcSearchStr);
             
-        }
+        //}
 
-        public Rule3(IOptions<Rule3Config> rule3Config)//change later
+        public Rule3(IOptions<Rule3Config> rule3Config, IOptions<FilePathConfig> filePathConfig)//change later
         {
             _rule3Config = rule3Config.Value;
             _abcSearchList = Helper.GetList(null, string.IsNullOrEmpty(_rule3Config.SearchStr1) ? "abc" : _rule3Config.SearchStr1);
-          
+            _filePathConfig = filePathConfig.Value;
+
         }
 
 
@@ -40,7 +42,8 @@ namespace CBArule
 
         public void WriteOutput(string str)
         {
-            System.IO.File.WriteAllText(@"C:\longest_words_starting_with_abc.txt", str);
+            //System.IO.File.WriteAllText(@"C:\longest_words_starting_with_abc.txt", str);
+            Helper.WriteToFile(_filePathConfig.FilePath, _rule3Config.FileName, str);
 
         }
 

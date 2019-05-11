@@ -11,20 +11,22 @@ namespace CBArule
         List<char> _cSearchList = null;
         List<char> _aSearchList = null;
         Rule4Config _rule4Config;
+        FilePathConfig _filePathConfig;
 
-        public Rule4(string cSearchStr, string aSearchStr)
-        {
-            _cSearchList = Helper.GetList(null, string.IsNullOrEmpty(cSearchStr) ? "cC" : cSearchStr);
-            _aSearchList = Helper.GetList(null, string.IsNullOrEmpty(aSearchStr) ? "aA" : aSearchStr);
-        }
+        //public Rule4(string cSearchStr, string aSearchStr)
+        //{
+        //    _cSearchList = Helper.GetList(null, string.IsNullOrEmpty(cSearchStr) ? "cC" : cSearchStr);
+        //    _aSearchList = Helper.GetList(null, string.IsNullOrEmpty(aSearchStr) ? "aA" : aSearchStr);
+        //}
 
 
-        public Rule4(IOptions<Rule4Config> rule4Config)//change later
+        public Rule4(IOptions<Rule4Config> rule4Config, IOptions<FilePathConfig> filePathConfig)//change later
         {
             
             _rule4Config = rule4Config.Value;
             _cSearchList = Helper.GetList(null, string.IsNullOrEmpty(_rule4Config.SearchStr1) ? "cC" : _rule4Config.SearchStr1);
-            _aSearchList = Helper.GetList(null, string.IsNullOrEmpty(_rule4Config.SearchStr1) ? "aA" : _rule4Config.SearchStr1);
+            _aSearchList = Helper.GetList(null, string.IsNullOrEmpty(_rule4Config.SearchStr2) ? "aA" : _rule4Config.SearchStr2);
+            _filePathConfig = filePathConfig.Value;
         }
 
 
@@ -48,7 +50,8 @@ namespace CBArule
 
         public void WriteOutput(string str)
         {
-            System.IO.File.WriteAllText(@"C:\longest_words_starting_with_abc.txt", str);
+            //System.IO.File.WriteAllText(@"count_of_sequence_of_words_starting_withs_c_and_a.txt", str);
+            Helper.WriteToFile(_filePathConfig.FilePath, _rule4Config.FileName, str);
 
         }
 
