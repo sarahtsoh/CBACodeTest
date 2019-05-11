@@ -9,11 +9,11 @@ namespace CBArule
 {
     public interface IRule
     {
-
         bool IsRuleIncluded();
         string Excecute(string str);
         void WriteOutput(string str);
         bool IsStopOnThisRule();
-       
+        void UpdateConfig();
+
     }
 }

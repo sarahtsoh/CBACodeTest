@@ -12,21 +12,23 @@ namespace CBArule
         List<char> _aSearchList = null;
         Rule4Config _rule4Config;
         FilePathConfig _filePathConfig;
-
-        //public Rule4(string cSearchStr, string aSearchStr)
-        //{
-        //    _cSearchList = Helper.GetList(null, string.IsNullOrEmpty(cSearchStr) ? "cC" : cSearchStr);
-        //    _aSearchList = Helper.GetList(null, string.IsNullOrEmpty(aSearchStr) ? "aA" : aSearchStr);
-        //}
-
+        IOptionsMonitor<Rule4Config> _rule4ConfigUpdate;
+        IOptionsMonitor<FilePathConfig> _filePathConfigUpdate;
 
         public Rule4(IOptionsMonitor<Rule4Config> rule4Config, IOptionsMonitor<FilePathConfig> filePathConfig)//change later
         {
-            
             _rule4Config = rule4Config.CurrentValue;
             _cSearchList = Helper.GetList(null, string.IsNullOrEmpty(_rule4Config.SearchStr1) ? "cC" : _rule4Config.SearchStr1);
             _aSearchList = Helper.GetList(null, string.IsNullOrEmpty(_rule4Config.SearchStr2) ? "aA" : _rule4Config.SearchStr2);
             _filePathConfig = filePathConfig.CurrentValue;
+            _rule4ConfigUpdate = rule4Config;
+            _filePathConfigUpdate = filePathConfig;
+        }
+
+        public void UpdateConfig()
+        {
+            _rule4ConfigUpdate.OnChange(x => _rule4Config = x);
+            _filePathConfigUpdate.OnChange(x => _filePathConfig = x);
         }
 
 

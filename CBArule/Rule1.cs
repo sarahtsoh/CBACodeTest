@@ -11,24 +11,26 @@ namespace CBArule
         List<char> _aSearchList = null;
         Rule1Config _rule1Config;
         FilePathConfig _filePathConfig;
-
-        //public Rule1(string aSearchStr)
-        //{
-            
-        //    _aSearchList = Helper.GetList(null, string.IsNullOrEmpty(aSearchStr) ? "aA" : aSearchStr);
-        //}
+        IOptionsMonitor<Rule1Config> _rule1ConfigUpdate;
+        IOptionsMonitor<FilePathConfig> _filePathConfigUpdate;
 
         public Rule1(IOptionsMonitor<Rule1Config> rule1Config, IOptionsMonitor<FilePathConfig> filePathConfig)//change later
         {
             _rule1Config = rule1Config.CurrentValue;
             _aSearchList = Helper.GetList(null, string.IsNullOrEmpty(_rule1Config.SearchStr1) ? "aA" : _rule1Config.SearchStr1);
             _filePathConfig = filePathConfig.CurrentValue;
+            _rule1ConfigUpdate = rule1Config;
+            _filePathConfigUpdate = filePathConfig;
+        }
 
+        public void UpdateConfig()
+        {
+            _rule1ConfigUpdate.OnChange(x => _rule1Config = x);
+            _filePathConfigUpdate.OnChange(x => _filePathConfig = x);
         }
 
         public string Excecute(string str)
         {
-            
             var wordList = new List<string>();
             var words = str.Split();
 
@@ -50,9 +52,7 @@ namespace CBArule
 
         public void WriteOutput(string str)
         {
-            //System.IO.File.WriteAllText(@"C:\average_length_of_words_starting_with_a.txt", str);
             Helper.WriteToFile(_filePathConfig.FilePath, _rule1Config.FileName, str);
-
 
         }
 

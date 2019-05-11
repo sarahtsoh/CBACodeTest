@@ -11,21 +11,24 @@ namespace CBArule
         List<char> _abcSearchList = null;
         Rule3Config _rule3Config;
         FilePathConfig _filePathConfig;
-
-        //public Rule3(string abcSearchStr)
-        //{
-        //    _abcSearchList = Helper.GetList(null, string.IsNullOrEmpty(abcSearchStr) ? "abc" : abcSearchStr);
-            
-        //}
+        IOptionsMonitor<Rule3Config> _rule3ConfigUpdate;
+        IOptionsMonitor<FilePathConfig> _filePathConfigUpdate;
 
         public Rule3(IOptionsMonitor<Rule3Config> rule3Config, IOptionsMonitor<FilePathConfig> filePathConfig)//change later
         {
             _rule3Config = rule3Config.CurrentValue;
             _abcSearchList = Helper.GetList(null, string.IsNullOrEmpty(_rule3Config.SearchStr1) ? "abc" : _rule3Config.SearchStr1);
             _filePathConfig = filePathConfig.CurrentValue;
+            _rule3ConfigUpdate = rule3Config;
+            _filePathConfigUpdate = filePathConfig;
 
         }
 
+        public void UpdateConfig()
+        {
+            _rule3ConfigUpdate.OnChange(x => _rule3Config = x);
+            _filePathConfigUpdate.OnChange(x => _filePathConfig = x);
+        }
 
         public string Excecute(string str)
         {

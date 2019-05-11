@@ -12,12 +12,8 @@ namespace CBArule
         List<char> _eSearchList = null;
         Rule2Config _rule2Config;
         FilePathConfig _filePathConfig;
-
-        //public Rule2( string bSearchStr, string eSearchStr)
-        //{
-        //    _bSearchList = Helper.GetList(null, string.IsNullOrEmpty(bSearchStr) ? "bB" : bSearchStr);
-        //    _eSearchList = Helper.GetList(null, string.IsNullOrEmpty(bSearchStr) ? "eE" : eSearchStr);
-        //}
+        IOptionsMonitor<Rule2Config> _rule2ConfigUpdate;
+        IOptionsMonitor<FilePathConfig> _filePathConfigUpdate;
 
         public Rule2(IOptionsMonitor<Rule2Config> rule2Config, IOptionsMonitor<FilePathConfig> filePathConfig)//change later
         {
@@ -26,8 +22,15 @@ namespace CBArule
             _bSearchList = Helper.GetList(null, string.IsNullOrEmpty(_rule2Config.SearchStr1) ? "bB" : _rule2Config.SearchStr1);
             _eSearchList = Helper.GetList(null, string.IsNullOrEmpty(_rule2Config.SearchStr2) ? "eE" : _rule2Config.SearchStr2);
             _filePathConfig = filePathConfig.CurrentValue;
+            _rule2ConfigUpdate = rule2Config;
+            _filePathConfigUpdate = filePathConfig;
         }
 
+        public void UpdateConfig()
+        {
+            _rule2ConfigUpdate.OnChange(x => _rule2Config = x);
+            _filePathConfigUpdate.OnChange(x => _filePathConfig = x);
+        }
 
         public string Excecute(string str)
         {

@@ -12,14 +12,16 @@ namespace CBArule
 
         public RulesApplicationService(IEnumerable<IRule> ruleList)//IOption)
         {
-            
            _ruleList = ruleList;
-
         }
 
 
         public void ExecuteRules(string str)
         {
+            foreach(var rule in _ruleList)
+            {
+                rule.UpdateConfig();
+            }
             var rules = _ruleList.Where(c => c.IsRuleIncluded());
             foreach (var rule in rules)
             {
