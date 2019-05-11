@@ -19,13 +19,13 @@ namespace CBArule
         //    _eSearchList = Helper.GetList(null, string.IsNullOrEmpty(bSearchStr) ? "eE" : eSearchStr);
         //}
 
-        public Rule2(IOptions<Rule2Config> rule2Config,IOptions<FilePathConfig> filePathConfig)//change later
+        public Rule2(IOptionsMonitor<Rule2Config> rule2Config, IOptionsMonitor<FilePathConfig> filePathConfig)//change later
         {
            
-            _rule2Config = rule2Config.Value;
+            _rule2Config = rule2Config.CurrentValue;
             _bSearchList = Helper.GetList(null, string.IsNullOrEmpty(_rule2Config.SearchStr1) ? "bB" : _rule2Config.SearchStr1);
             _eSearchList = Helper.GetList(null, string.IsNullOrEmpty(_rule2Config.SearchStr2) ? "eE" : _rule2Config.SearchStr2);
-            _filePathConfig = filePathConfig.Value;
+            _filePathConfig = filePathConfig.CurrentValue;
         }
 
 

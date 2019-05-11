@@ -20,13 +20,13 @@ namespace CBArule
         //}
 
 
-        public Rule4(IOptions<Rule4Config> rule4Config, IOptions<FilePathConfig> filePathConfig)//change later
+        public Rule4(IOptionsMonitor<Rule4Config> rule4Config, IOptionsMonitor<FilePathConfig> filePathConfig)//change later
         {
             
-            _rule4Config = rule4Config.Value;
+            _rule4Config = rule4Config.CurrentValue;
             _cSearchList = Helper.GetList(null, string.IsNullOrEmpty(_rule4Config.SearchStr1) ? "cC" : _rule4Config.SearchStr1);
             _aSearchList = Helper.GetList(null, string.IsNullOrEmpty(_rule4Config.SearchStr2) ? "aA" : _rule4Config.SearchStr2);
-            _filePathConfig = filePathConfig.Value;
+            _filePathConfig = filePathConfig.CurrentValue;
         }
 
 

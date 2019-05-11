@@ -18,11 +18,11 @@ namespace CBArule
         //    _aSearchList = Helper.GetList(null, string.IsNullOrEmpty(aSearchStr) ? "aA" : aSearchStr);
         //}
 
-        public Rule1(IOptions<Rule1Config> rule1Config, IOptions<FilePathConfig> filePathConfig)//change later
+        public Rule1(IOptionsMonitor<Rule1Config> rule1Config, IOptionsMonitor<FilePathConfig> filePathConfig)//change later
         {
-            _rule1Config = rule1Config.Value;
+            _rule1Config = rule1Config.CurrentValue;
             _aSearchList = Helper.GetList(null, string.IsNullOrEmpty(_rule1Config.SearchStr1) ? "aA" : _rule1Config.SearchStr1);
-            _filePathConfig = filePathConfig.Value;
+            _filePathConfig = filePathConfig.CurrentValue;
 
         }
 

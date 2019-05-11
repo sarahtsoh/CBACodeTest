@@ -18,11 +18,11 @@ namespace CBArule
             
         //}
 
-        public Rule3(IOptions<Rule3Config> rule3Config, IOptions<FilePathConfig> filePathConfig)//change later
+        public Rule3(IOptionsMonitor<Rule3Config> rule3Config, IOptionsMonitor<FilePathConfig> filePathConfig)//change later
         {
-            _rule3Config = rule3Config.Value;
+            _rule3Config = rule3Config.CurrentValue;
             _abcSearchList = Helper.GetList(null, string.IsNullOrEmpty(_rule3Config.SearchStr1) ? "abc" : _rule3Config.SearchStr1);
-            _filePathConfig = filePathConfig.Value;
+            _filePathConfig = filePathConfig.CurrentValue;
 
         }
 
