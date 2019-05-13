@@ -7,10 +7,11 @@ using System;
 namespace CBARuleUnitTest
 {
 
-    public class Rule4Test : IDisposable
+    public class Rule4Test
     {
         public IRule rule4;
         //Constructor is a bit like testfixture
+        //no unmanaged resources that needs to be tear down
         public Rule4Test()
         {
             Rule4Config config = new Rule4Config();
@@ -32,10 +33,7 @@ namespace CBARuleUnitTest
             Assert.Equal("2", output);
         }
 
-        public void Dispose()
-        {
-            //require IRule to implement IDispose
-        }
+       
 
     }
 }
