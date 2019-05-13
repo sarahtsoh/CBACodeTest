@@ -29,7 +29,7 @@ namespace CBARuleUnitTest
         {
             string testData = "aaa aba cbaaa abcde abcdefg";
             var output = rule1.Excecute(testData);
-            Assert.Equal("4", output);
+            Assert.Equal("4.5", output);
         }
 
        

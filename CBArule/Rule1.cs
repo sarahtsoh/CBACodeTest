@@ -34,16 +34,7 @@ namespace CBArule
             var wordList = new List<string>();
             var words = str.Split();
 
-            wordList = words.Where(w => _aSearchList.Any(s => w.StartsWith(s))).ToList();
-
-            var totalNumWords = wordList.Count;
-            var indiviaulWordLength = 0;
-            foreach (var word in wordList)
-            {
-                indiviaulWordLength += word.Length;
-            }
-
-            var averageLength = indiviaulWordLength / totalNumWords;
+           var averageLength = words.Where(w => _aSearchList.Any(s => w.StartsWith(s))).Average(s=>s.Length);
 
             return averageLength.ToString();
         }
