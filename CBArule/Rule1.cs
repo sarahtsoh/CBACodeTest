@@ -73,6 +73,13 @@ namespace CBArule
 
         }
 
+        //void Disposable()
+        //{
+        //    _rule1Config.Dispose(true);
+        //    // Suppress finalization.
+        //    GC.SuppressFinalize(this);
+        //}
+
 
     }
 }

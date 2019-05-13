@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 //https://edi.wang/post/2019/1/5/auto-refresh-settings-changes-in-aspnet-core-runtime
 namespace CBArule
 {
-    public interface IRule
+    public interface IRule //:IDisposable
     {
         bool IsRuleIncluded();
         string Excecute(string str);
         void WriteOutput(string str);
         bool IsStopOnThisRule();
         void UpdateConfig();
+        //void Disposable();
 
     }
 }
